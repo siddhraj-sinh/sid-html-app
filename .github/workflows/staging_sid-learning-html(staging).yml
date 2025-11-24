@@ -34,5 +34,7 @@ jobs:
           app-name: 'sid-learning-html'
           slot-name: 'staging'
           package: .
+          clean: true
 
           
+
