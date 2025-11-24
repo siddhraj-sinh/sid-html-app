@@ -1,9 +1,9 @@
-name: Deploy HTML site to Azure Web App
+name: Deploy to STAGING slot
 
 on:
   push:
     branches:
-      - master
+      - staging
   workflow_dispatch:
 
 jobs:
@@ -17,8 +17,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # No npm install or build needed for HTML apps
-
       - name: Login to Azure
         uses: azure/login@v2
         with:
@@ -26,9 +24,9 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_CDD5A40F9A514B2C9B2B5F80C5BD3FD4 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_F1A4E693FA244EA4AB81CC731E5ECBEE }}
 
-      - name: Deploy HTML files to Azure Web App
+      - name: Deploy HTML to STAGING slot
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'sid-learning-html'
-          slot-name: 'Production'
+          slot-name: 'staging'
           package: .
